@@ -7,27 +7,58 @@
 
     <TextView
         android:id="@+id/textView_youtube_main"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="292dp"
+        android:layout_height="35dp"
         android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
         android:layout_marginTop="152dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="9dp"
         android:text="Video Title"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewYoutubeChannelName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/imageViewProfilPhoto"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView_youtube_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="6dp"
-        app:layout_constraintBottom_toTopOf="@+id/textView_youtube_main"
+        android:id="@+id/imageViewVideo"
+        android:layout_width="300dp"
+        android:layout_height="93dp"
+        android:layout_marginTop="28dp"
+        app:layout_constraintDimensionRatio="h,16:9"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.693"
         app:layout_constraintStart_toStartOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/youtube" />
+
+    <TextView
+        android:id="@+id/textViewYoutubeChannelName"
+        android:layout_width="302dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="Channel Name"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView_youtube_main"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView_youtube_main"
+        app:layout_constraintTop_toBottomOf="@+id/textView_youtube_main"
+        app:layout_constraintVertical_bias="0.36" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewProfilPhoto"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        app:civ_border_width="2dp"
+        app:civ_border_color="#FF000000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewVideo"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/youtube" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.youtubeclonee"
-        minSdkVersion 15
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -38,6 +38,18 @@ dependencies {
     //Groupie Recyclerview
     implementation "com.xwray:groupie:2.8.1"
     implementation "com.xwray:groupie-databinding:2.8.1"
+
+    //Http2 & Retrofit  & Gson
+    implementation("com.squareup.okhttp3:okhttp:4.9.0")
+    implementation 'com.google.code.gson:gson:2.8.6'
+    implementation 'com.squareup.retrofit2:retrofit:2.7.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.7.0'
+    implementation "com.squareup.retrofit2:adapter-rxjava2:2.7.0"
+
+    //CircleImageView & Picasso
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    
 
 
 }
