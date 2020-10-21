@@ -10,7 +10,8 @@ import com.xwray.groupie.Item
 import kotlinx.android.synthetic.main.youtube_main_row.view.*
 import retrofit2.Response
 
-class YoutubeMainRow(val homeFeed: HomeFeed?): Item<GroupieViewHolder>() {
+class YoutubeMainRow(val homeFeed: HomeFeed?): Item<GroupieViewHolder>(){
+
 
 
     override fun getLayout(): Int {
@@ -23,4 +24,5 @@ class YoutubeMainRow(val homeFeed: HomeFeed?): Item<GroupieViewHolder>() {
         viewHolder.itemView.textViewYoutubeChannelName.text = video?.channel?.name  + "    .     " + "28K Views\n 4 day ago"
         Picasso.get().load(video?.channel?.profileImageUrl).into(viewHolder.itemView.imageViewProfilPhoto)
     }
+
 }

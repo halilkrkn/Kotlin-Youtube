@@ -1,10 +1,12 @@
 package com.example.youtubeclonee.uı
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView
 import com.example.youtubeclonee.R
+import com.example.youtubeclonee.adapter.CourseDetailRow
 import com.example.youtubeclonee.adapter.YoutubeMainRow
 import com.example.youtubeclonee.model.Channel
 import com.example.youtubeclonee.model.HomeFeed
@@ -28,11 +30,12 @@ class YoutubeMain : AppCompatActivity() {
 
        companion object{
            const val BASE_URL = "https://api.letsbuildthatapp.com/"
+           private var feedHome: ArrayList<HomeFeed>? = null
        }
 
 
     val adapter =  GroupAdapter<GroupieViewHolder>()
-    private var youtubeModels: HomeFeed? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +56,8 @@ class YoutubeMain : AppCompatActivity() {
     private fun loadYoutubeData(){
 
 
+//
+//
 //        val client = OkHttpClient()
 //
 //        val retrofit = Retrofit.Builder()
@@ -103,9 +108,16 @@ class YoutubeMain : AppCompatActivity() {
 
                 val gson = GsonBuilder().create()
                 val homeFeed = gson.fromJson(body,HomeFeed::class.java)
+
                 runOnUiThread {
-                        adapter.add(YoutubeMainRow(homeFeed))
-                        adapter.add(YoutubeMainRow(homeFeed))
+
+                    adapter.add(YoutubeMainRow(homeFeed))
+                }
+                adapter.setOnItemClickListener { item, view ->
+
+                    val intent = Intent(view.context, CourseDetailActivity::class.java)
+                    view.context.startActivity(intent)
+
                 }
             }
 
