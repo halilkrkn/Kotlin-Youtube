@@ -11,11 +11,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".uı.CourseDetailActivity"
-           android:label="Course Detail "
-            android:launchMode="singleTop">
+        <activity android:name=".uı.CourseLessonActivity">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".uı.CourseDetailActivity"/>
         </activity>
-        <activity android:name=".uı.YoutubeMain"
+        <activity
+            android:name=".uı.CourseDetailActivity"
+            android:label="Course Detail "
+            android:launchMode="singleTop">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".uı.YoutubeMain"/>
+        </activity>
+        <activity
+            android:name=".uı.YoutubeMain"
             android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.youtubeclonee.R
 import com.example.youtubeclonee.adapter.CourseDetailRow
@@ -28,21 +29,12 @@ import java.io.IOException
 
 class YoutubeMain : AppCompatActivity() {
 
-       companion object{
-           const val BASE_URL = "https://api.letsbuildthatapp.com/"
-           private var feedHome: ArrayList<HomeFeed>? = null
-       }
-
-
-    val adapter =  GroupAdapter<GroupieViewHolder>()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_youtube_main)
 
 
-        recyclerViewMain.adapter = adapter
+        recyclerViewMain.layoutManager = LinearLayoutManager(this)
         recyclerViewMain.addItemDecoration(DividerItemDecoration(this,DividerItemDecoration.VERTICAL))
 
         loadYoutubeData()
@@ -53,83 +45,38 @@ class YoutubeMain : AppCompatActivity() {
 
     }
 
+   // OkHttp yi kullnarak veriyi çektim.
     private fun loadYoutubeData(){
 
-
-//
-//
-//        val client = OkHttpClient()
-//
-//        val retrofit = Retrofit.Builder()
-//            .client(client)
-//            .baseUrl("https://api.letsbuildthatapp.com")
-//            .addConverterFactory(GsonConverterFactory.create())
-//            .build()
-//
-//        val service = retrofit.create(YoutubeApi::class.java)
-//        val call = service.getData()
-//
-//
-//        call.enqueue(object: Callback<HomeFeed>{
-//            override fun onResponse(call: Call<HomeFeed>, response: Response<HomeFeed>) {
-//                if (response.isSuccessful){
-//
-//                   val homeFeed = response.body()
-//                        runOnUiThread {
-//                            adapter.add(YoutubeMainRow(homeFeed))
-//
-//                        }
-//
-//                }
-//
-//            }
-//
-//            override fun onFailure(call: Call<HomeFeed>, t: Throwable) {
-//
-//            }
-//
-//        })
-
-
-
+       // Api uzantımız
        val url = "https://api.letsbuildthatapp.com/youtube/home_feed"
+
+       //Api uzantımız için isteğimizi oluşturduk.
        val request = Request.Builder()
            .url(url)
            .build()
 
+       // okHttpClient ıda kullanarak verilerin  çekmemizi sağladım.
         val client = OkHttpClient()
-        client.newCall(request).enqueue(object : okhttp3.Callback{
+        client.newCall(request).enqueue(object : okhttp3.Callback {
             override fun onFailure(call: okhttp3.Call, e: IOException) {
-                   e.printStackTrace()
+                e.printStackTrace()
             }
 
             override fun onResponse(call: okhttp3.Call, response: okhttp3.Response) {
                 val body = response.body?.string()
 
+                //Gson ile verilerin Json formatında çekmemize sağlıyor.
                 val gson = GsonBuilder().create()
-                val homeFeed = gson.fromJson(body,HomeFeed::class.java)
+                val homeFeed = gson.fromJson(body, HomeFeed::class.java)
 
+                //Thread de hatta çıkmasın diye bu blog içerinse tanımladık.
                 runOnUiThread {
 
-                    adapter.add(YoutubeMainRow(homeFeed))
-                }
-                adapter.setOnItemClickListener { item, view ->
-
-                    val intent = Intent(view.context, CourseDetailActivity::class.java)
-                    view.context.startActivity(intent)
+                    recyclerViewMain.adapter = YoutubeMainRow(homeFeed)
 
                 }
             }
-
-
         })
     }
-
-//    private fun Dummy(){
-//        adapter.add(YoutubeMainRow())
-//        adapter.add(YoutubeMainRow())
-//        adapter.add(YoutubeMainRow())
-//        adapter.add(YoutubeMainRow())
-//        adapter.add(YoutubeMainRow())
-//    }
 }
